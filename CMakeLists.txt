@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.0.0)
+project(rgbscroll VERSION 1.0.0)
+set(RGBSCROLL_TARGET_NAME rgbscroll)
+set(RGBSCROLL_MAIN_CPP ${CMAKE_SOURCE_DIR}/main.cpp)
+add_executable(${RGBSCROLL_TARGET_NAME} ${RGBSCROLL_MAIN_CPP})
