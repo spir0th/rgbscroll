@@ -1,5 +1,5 @@
 ## rgbscroll
-A small program that locates and toggles keyboards that have unsupported LED(s)
+A small program that locates keyboards that have unsupported LED(s) and trigger them using the Scroll Lock key.
 
 ### What does this do?
 Some cheap keyboards have LED(s) that can be triggered by using the scroll lock key, and GNU/Linux systems cannot toggle them.
