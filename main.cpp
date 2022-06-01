@@ -6,6 +6,17 @@
 #include <memory>
 #include <string>
 
+#include "unistd.h"
+
+bool is_root() {
+    // Return true if program is ran by superuser/root, otherwise return false
+    uid_t pub_uid = getuid();
+    uid_t priv_uid = geteuid();
+
+    if (pub_uid == priv_uid) return false;
+    return true;
+}
+
 std::string get_device_led() {
     // Return the keyboard's LED path (with existence)
     using std::cout, std::endl;
@@ -55,13 +66,25 @@ void exec(const char* command)
 int main() {
     using std::string, std::cout, std::endl;
     string device_led = get_device_led();
-    string state_off = "echo 0 > " + device_led;
-    string state_on = "echo 1 > " + device_led;
+    string root_state_off = "echo 0 > " + device_led;
+    string root_state_on = "echo 1 > " + device_led;
+    string state_off = "xset led off";
+    string state_on = "xset led on";
 
     if (!is_device_led_on(device_led)) {
-        exec(state_on.c_str());
+        if (!is_root()) {
+            exec(state_on.c_str());
+            return EXIT_SUCCESS;
+        }
+
+        exec(root_state_on.c_str());
     } else {
-        exec(state_off.c_str());
+        if (!is_root()) {
+            exec(state_off.c_str());
+            return EXIT_SUCCESS;
+        }
+
+        exec(root_state_off.c_str());
     }
 
     return EXIT_SUCCESS;
