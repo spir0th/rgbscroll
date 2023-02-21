@@ -1,6 +1,8 @@
 ## rgbscroll
 A small program that toggles RGB lights of a keyboard.
 
+**This project is deprecated in favor of [keylight](https://github.com/spirothdev/keylight).**
+
 ### What does this do?
 Most cheap (or Chinese-made) keyboards that have cool RGB lights only support Windows, this program fixes it for Linux by iterating the `/sys/class/leds` paths until it is found to be toggled by increasing the brightness value to `1`.
 
